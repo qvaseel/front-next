@@ -11,7 +11,7 @@ interface ILidersCard {
 
 const LidersCard = ({img, name, lastname, position, position2}: ILidersCard) => {
     return (
-        <div className="flex flex-col w-48 items-center">
+        <div className="flex flex-col w-50 items-center">
             <div
                 className="teamImgWrapper mx-auto mb-2.5 flex h-[176px] w-[176px] items-center justify-center overflow-hidden rounded-[50%] bg-[#624AFF] m:h-[120px] m:w-[120px]">
                 <picture className="w-[94%]">
