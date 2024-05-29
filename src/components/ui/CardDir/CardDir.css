@@ -1,0 +1,28 @@
+.purple {
+    background-color: #624AFF;
+    flex: 0 0 285px;
+}
+
+.purple span {
+    background-color: white;
+    color: #624AFF;
+}
+
+.purple p {
+    color: white;
+}
+
+.white {
+    background-color: #F8F8F8;
+    flex: 0 0 285px;
+}
+
+.white span {
+    background-color: #F8F8F8;
+    color: #624AFF;
+    border: 1px solid #624AFF;
+}
+
+.white p {
+    color: #1F1F1F;
+}

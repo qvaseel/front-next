@@ -1,0 +1,20 @@
+.title_section span {
+  font-weight: bolder;
+}
+
+.span_purple {
+  font-weight: bolder;
+  color: #624AFF;
+  position: relative;
+}
+
+/* .title_section a:after {
+  position: absolute;
+  content: '';
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  width: auto;
+  background: #624AFF;
+} */

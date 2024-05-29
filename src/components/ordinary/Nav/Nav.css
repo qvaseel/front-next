@@ -1,0 +1,5 @@
+@media (max-width: 921px) {
+    .active {
+        transform: translateX(-100%);
+    }
+}

@@ -1,0 +1,25 @@
+.phone_link {
+    position: relative;
+}
+
+.phone_link:before {
+	font-family: FontAwesome;
+	content:"\f095";
+	position: absolute;
+	transition: all 400ms ease-out;
+	left: 45%;
+    top: 25%;
+    color: transparent;
+    font-size: 24px;
+    pointer-events: none;
+}
+
+.link:hover {
+    color: transparent;
+}
+
+.phone_link:hover:before {
+	/* left: 45%; */
+    top: 0;
+    color: #fff;
+}

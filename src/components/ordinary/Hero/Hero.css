@@ -1,0 +1,32 @@
+.hero_link {
+    position: relative;
+}
+
+.hero_link:before {
+    content:'';
+	position: absolute;
+	top: -10px;
+	left: 0;
+	width: 100%;
+    transform: scaleX(0);
+    height: 46px;
+	background: #624AFF;
+    opacity: 0.15;
+	transition: transform 1s ease;
+    transform-origin: right;
+    text-align: left;
+    border-radius: 100px;
+    pointer-events: none;
+}
+
+.hero_link:hover:before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+@media (max-width: 360px) {
+    .hero_link:before {
+        top: -8px;
+        height: 42px;
+    }
+}
