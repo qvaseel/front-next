@@ -4,31 +4,39 @@ import InputMask from "react-input-mask";
 import React, { useState } from "react";
 import "./Form.css";
 import clip from "/public/images/svg/clip.svg";
+import axios from "axios";
 
 interface IForm {
   name: string;
   phone: string;
   email: string;
-  message: string;
-  file: any;
+  other: string;
+  file: File | null;
 }
 
 const Form = () => {
   const [fileName, setFileName] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
   const [inpValue, setInpValue] = useState<string>("");
-  const [error, setError] = useState("");
+  const [isLoaded, setIsLoaded] = useState({
+    message: '',
+    error: false,
+});
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setFileName(file.name);
+      setFile(file);
     } else {
       setFileName(null);
+      setFile(null);
     }
   };
 
   const handleRemoveFile = () => {
     setFileName(null);
+    setFile(null);
   };
 
   function handlePhoneChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -48,11 +56,27 @@ const Form = () => {
     return regex.test(value) || "Введите корректный номер телефона";
   };
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: any) => {
+    
+    data.file = file;
+    // console.log(data)
+    try {
+      await axios.post('http://localhost:3002/submit-form', data, {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          }
+      });
+      console.log(data)
+      setIsLoaded({error: true, message: "Ваша заявка успешно отправлена."})
+  } catch (error) {
+      console.error(error);
+      setIsLoaded({error: true, message: "При отправке формы произошла ошибка."})
+  }
     reset();
     setInpValue("");
-  };
+    setFileName(null);
+    setFile(null);
+  }
 
   return (
     <form
@@ -85,9 +109,9 @@ const Form = () => {
         {...register("email", { required: true })}
       />
       <textarea
-        className={errors.message ? "textarea errors" : "textarea"}
+        className={errors.other ? "textarea errors" : "textarea"}
         placeholder="О проекте"
-        {...register("message", { required: true })}
+        {...register("other", { required: true })}
       />
 
       <div className="file-input-container">
@@ -104,6 +128,7 @@ const Form = () => {
           {...register("file")}
           className="file-input"
           onChange={handleFileChange}
+          accept=".pdf,.doc,.docx"
         />
       </div>
       {fileName && (
@@ -125,6 +150,7 @@ const Form = () => {
           value="Написать"
         />
       </div>
+      {isLoaded.error && <p className="text-base max-sm:text-sm text-[#4D4D4D]">{isLoaded.message}</p>}
     </form>
   );
 };
